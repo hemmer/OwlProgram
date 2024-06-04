@@ -12,6 +12,8 @@
 #define NOF_PARAMETERS    20
 #define NOF_BUTTONS       20
 
+#include <stdint.h>
+
 struct PatchMetadata {
 public:
   struct Control {
