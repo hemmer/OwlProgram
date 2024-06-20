@@ -141,9 +141,9 @@ void* pvPortRealloc(void *pv, size_t xWantedSize);
 #undef RAND_MAX
 #define RAND_MAX UINT32_MAX
 
-#elif defined(__APPLE__)
+#elif defined(__APPLE__) || defined(__MINGW32__)
 
-// not defined on mac
+// not defined on mac/win32
 #define exp10f(x) fast_exp10f(x)
 
 #endif //ARM_CORTEX
