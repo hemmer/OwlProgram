@@ -10,6 +10,9 @@ VoltsPerOctave::VoltsPerOctave(float o, float m)
 
 VoltsPerOctave::VoltsPerOctave(bool input) : tune(0.0) {
   int32_t volts_offset = 0, volts_scalar = 0;
+  multiplier = 1.f;
+  offset = 0.f;
+  return;
   void* args[] = {
     (void*)(input ? "IO" : "OO"), (void*)&volts_offset, 
     (void*)(input ? "IS" : "OS"), (void*)&volts_scalar
