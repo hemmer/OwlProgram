@@ -9,7 +9,9 @@ protected:
   size_t channels;
   size_t size;
 public:
-  MemoryBuffer(float* buf, size_t ch, size_t sz): buffer(buf), channels(ch), size(sz) {}
+  MemoryBuffer(float* buf, size_t ch, size_t sz): buffer(buf), channels(ch), size(sz) {
+    clear();
+  }
   virtual ~MemoryBuffer(){}
   void clear() {
     memset(buffer, 0, size*channels*sizeof(float));

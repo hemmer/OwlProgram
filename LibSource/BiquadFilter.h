@@ -339,7 +339,7 @@ public:
 
   /* process a single sample and return the result */
   float process(float input){
-    float output;
+    float output = 0.f;
     process(&input, &output, 1);
     return output;
   }
