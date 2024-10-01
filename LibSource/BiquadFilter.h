@@ -77,6 +77,7 @@ public:
   }
 
   static void setBandPass(float* coefficients, float omega, float q){
+    omega = Clamp(omega, 0.0002, 0.48);
     float K = tanf(omega);
     float norm = 1 / (1 + K / q + K * K);
     coefficients[0] = K / q * norm;
