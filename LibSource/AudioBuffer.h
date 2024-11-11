@@ -8,7 +8,7 @@ public:
   virtual ~AudioBuffer();
   virtual FloatArray getSamples(int channel) = 0;
   virtual int getChannels() = 0;
-  virtual int getSize() = 0;
+  virtual size_t getSize() = 0;
   virtual void clear() = 0;
   void multiply(float scalar){
     for(int i=0; i<getChannels(); ++i)

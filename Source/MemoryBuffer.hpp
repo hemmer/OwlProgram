@@ -23,7 +23,7 @@ public:
   int getChannels() {
     return channels;
   }
-  int getSize() {
+  size_t getSize() {
     return size;
   }
 };
