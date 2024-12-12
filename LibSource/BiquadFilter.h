@@ -222,6 +222,10 @@ public:
   }
   virtual ~BiquadFilter(){}
 
+  void reset() {
+    init();
+  }
+
   void setSampleRate(float sr){
     pioversr = M_PI/sr;
   }
