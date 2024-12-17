@@ -148,4 +148,7 @@ void* pvPortRealloc(void *pv, size_t xWantedSize);
 
 #endif //ARM_CORTEX
 
+// not defined on mac/win32
+#define exp10f(x) fast_exp10f(x)
+
 #endif // __basicmaths_h__
