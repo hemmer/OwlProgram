@@ -342,11 +342,20 @@ public:
     }
   }
 
+  // arm optimizations kick in when >=4 samples are processed at a time
+  static constexpr size_t ProcessBufferSize = 4;
+  float process_buffer_in[ProcessBufferSize]{};
+  float process_bufer_out[ProcessBufferSize]{};
+  unsigned process_buffer_i = 0;
+
   /* process a single sample and return the result */
   float process(float input){
-    float output = 0.f;
-    process(&input, &output, 1);
-    return output;
+	process_buffer_in[process_buffer_i++] = input;
+	if (process_buffer_i >= ProcessBufferSize) {
+		process(process_buffer_in, process_bufer_out, ProcessBufferSize);
+		process_buffer_i = 0;
+	} 
+	return process_bufer_out[process_buffer_i];
   }
 
   void setLowPass(float fc, float q){
