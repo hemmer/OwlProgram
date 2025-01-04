@@ -124,7 +124,8 @@ void* pvPortRealloc(void *pv, size_t xWantedSize);
 #ifdef log2
 #undef log2 /* defined in math.h */
 #endif
-#define log(x) fast_logf(x)
+// FIXME: conflicts with Rack::logger::log()
+// #define log(x) fast_logf(x)
 #define logf(x) fast_logf(x)
 #define log2(x) fast_log2f(x)
 #define log2f(x) fast_log2f(x)
