@@ -4,7 +4,7 @@
 #include "fastpow.h"
 #include "fastlog.h"
 
-#ifdef ARM_CORTEX
+#if 0 // def ARM_CORTEX
 /* The realloc() function changes the size of the memory block pointed  to */
 /* by ptr to size bytes.  The contents will be unchanged in the range from */
 /* the start of the region up to the minimum of the old and new sizes.  If */

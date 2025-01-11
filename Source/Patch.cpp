@@ -97,7 +97,7 @@ void Patch::sendMidi(MidiMessage msg){
 #endif /* USE_MIDI_CALLBACK */
 
 Resource* Patch::getResource(const char* name){
-  Resource* resource = Resource::load(name);
+  Resource* resource = nullptr; //Resource::load(name);
   if(resource == NULL)
     error(CONFIGURATION_ERROR_STATUS, "Missing Resource");
   return resource;
