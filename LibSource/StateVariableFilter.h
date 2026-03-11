@@ -30,7 +30,7 @@ protected:
     return k;
   }
 public:
-  AbstractStateVariableFilter(float sr): pioversr(M_PI/sr) {}
+  AbstractStateVariableFilter(float sr): pioversr(static_cast<float>(M_PI) / sr) {}
 
   void setCutoff(float fc, float q){
     const float k = kvalue(fc, q);
@@ -73,15 +73,15 @@ public:
   
   void setBell(float fc, float q, float gain){
     const float k = kvalue(fc, q);
-    const float A = exp10f(gain/40.);
+    const float A = exp10f(gain / 40.f);
     m0 = 1.0f;
-    m1 = k * (A * A - 1.);
+    m1 = k * (A * A - 1.0f);
     m2 = 0.0f;
   }
   
   void setLowShelf(float fc, float q, float gain){
     const float k = kvalue(fc, q);
-    const float A = exp10f(gain/40.);
+    const float A = exp10f(gain / 40.f);
     m0 = 1.0f;
     m1 = k * (A - 1.0f);
     m2 = (A * A - 1.0f);
@@ -89,7 +89,7 @@ public:
 
   void setHighShelf(float fc, float q, float gain){
     const float k = kvalue(fc, q);
-    const float A = exp10f(gain/40.);
+    const float A = exp10f(gain / 40.f);
     m0 = A * A;
     m1 = k * (1.0f - A) * A;
     m2 = (1.0f - A * A);
@@ -128,8 +128,8 @@ public:
     float v1 = a1 * ic1eq + a2 * (v0 - ic2eq);
     float v2 = ic2eq + g * v1;
 #endif
-    ic1eq = 2. * v1 - ic1eq;
-    ic2eq = 2. * v2 - ic2eq;
+    ic1eq = 2.0f * v1 - ic1eq;
+    ic2eq = 2.0f * v2 - ic2eq;
     return m0 * v0 + m1 * v1 + m2 * v2;
   }
 
@@ -146,8 +146,8 @@ public:
       v1 = a1 * ic1eq + a2 * (v0 - ic2eq);
       v2 = ic2eq + g * v1;
 #endif
-      ic1eq = 2. * v1 - ic1eq;
-      ic2eq = 2. * v2 - ic2eq;
+      ic1eq = 2.0f * v1 - ic1eq;
+      ic2eq = 2.0f * v2 - ic2eq;
       output[s] = m0 * v0 + m1 * v1 + m2 * v2;
     }
   }
@@ -190,8 +190,8 @@ public:
       v1 = a1 * ic1eq + a2 * (v0 - ic2eq);
       v2 = ic2eq + g * v1;
 #endif
-      ic1eq = 2. * v1 - ic1eq;
-      ic2eq = 2. * v2 - ic2eq;
+      ic1eq = 2.0f * v1 - ic1eq;
+      ic2eq = 2.0f * v2 - ic2eq;
       low[s] = v2;
       band[s] = v1;
       high[s] = v0 - m0*v1 - v2;
@@ -216,8 +216,8 @@ public:
       v1 = a1 * ic1eq + a2 * (v0 - ic2eq);
       v2 = ic2eq + g * v1;
 #endif
-      ic1eq = 2. * v1 - ic1eq;
-      ic2eq = 2. * v2 - ic2eq;
+      ic1eq = 2.0f * v1 - ic1eq;
+      ic2eq = 2.0f * v2 - ic2eq;
       low[s] = v2;
       band[s] = v1;
       high[s] = v0 - m0*v1 - v2;
@@ -280,8 +280,8 @@ public:
 	v1 = a1 * ic1eq + a2 * (v0 - ic2eq);
 	v2 = ic2eq + g * v1;
 #endif
-	ic1eq = 2. * v1 - ic1eq;
-	ic2eq = 2. * v2 - ic2eq;
+	ic1eq = 2.0f * v1 - ic1eq;
+	ic2eq = 2.0f * v2 - ic2eq;
 	out[s] = m0 * v0 + m1 * v1 + m2 * v2;
       }
       state[0] = ic1eq;

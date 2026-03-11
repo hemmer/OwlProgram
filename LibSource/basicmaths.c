@@ -89,9 +89,9 @@ float arm_sqrtf(float in){
  * from http://dspguru.com/dsp/tricks/fixed-point-atan2-with-self-normalization
  */
 float fast_atan2f(float y, float x){
-  const float coeff_1 = M_PI/4;
-  const float coeff_2 = 3*M_PI/4;
-  float abs_y = fabs(y)+1e-10; // kludge to prevent 0/0 condition
+  const float coeff_1 = ((float)M_PI) / 4.f;
+  const float coeff_2 = 3.f * ((float)M_PI) / 4.f;
+  float abs_y = fabsf(y) + 1e-10f; // kludge to prevent 0/0 condition
   float r, angle;
   if (x>=0){
     r = (x - abs_y) / (x + abs_y);
@@ -119,7 +119,7 @@ static uint32_t pow_precision;
 #define M_LOG210 3.32192809488736
 
 float fast_powf(float x, float y){
-  return powFastLookup(y, logf(x)*M_LOG2E, pow_table, pow_precision);
+  return powFastLookup(y, logf(x) * ((float)M_LOG2E), pow_table, pow_precision);
 }
     
 float fast_expf(float x){
@@ -140,12 +140,12 @@ float fast_logf(float x){
 
 float fast_log10f(float x){
   /* log10 (x) equals log (x) / log (10). */
-  return icsi_log(x, log_table, log_precision) / M_LN10;
+  return icsi_log(x, log_table, log_precision) / ((float)M_LN10);
 }
 
 float fast_log2f(float x){
   /* log2 (x) equals log (x) / log (2). */
-  return icsi_log(x, log_table, log_precision) / M_LN2;
+  return icsi_log(x, log_table, log_precision) / ((float)M_LN2);
 }
 
 void fast_pow_set_table(const uint32_t* table, int size){

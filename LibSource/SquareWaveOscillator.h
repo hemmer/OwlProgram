@@ -56,7 +56,7 @@ public:
   float getSample(){
     float sample = phase < pw ? 1 : -1;
     sample += polyblep(phase, incr);
-    sample -= polyblep(fmod(phase + 1 - pw, 1), incr);
+    sample -= polyblep(fmodf(phase + 1.f - pw, 1.f), incr);
     return sample;
   }
   void generate(FloatArray output){
@@ -70,7 +70,7 @@ public:
     }else{
       sample = -1;
       if(phase-pw < incr){
-	float t = fmod(phase + 1 - pw, 1) / incr;
+	float t = fmodf(phase + 1.f - pw, 1.f) / incr;
 	sample -= t+t - t*t - 1;
       }
     }
@@ -79,9 +79,9 @@ public:
     while(len--){
       phase += incr;
       if(phase >= pw){
-	if(phase >= 1){
+	if(phase >= 1.f){
 	  // wrap phase
-	  phase -= 1;
+	  phase -= 1.f;
 	  // correct current sample
 	  float t = (phase - incr) / incr;
 	  sample += t*t + t+t + 1;
@@ -92,12 +92,12 @@ public:
 	  sample += t+t - t*t - 1;
 	}else if(sample == 1){
 	  // correct current sample
-	  float t = (fmod(phase + 1 - pw, 1) - incr) / incr;
+	  float t = (fmodf(phase + 1.f - pw, 1.f) - incr) / incr;
 	  sample -= t*t + t+t + 1;
 	  *dest++ = sample;
 	  sample = -1;
 	  // correct next sample
-	  t = fmod(phase + 1 - pw, 1) / incr;
+	  t = fmodf(phase + 1.f - pw, 1.f) / incr;
 	  sample -= t+t - t*t - 1;
 	}else{
 	  *dest++ = sample;

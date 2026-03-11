@@ -87,11 +87,13 @@ public:
     return incr/mul;
   }
   void setPhase(float ph){
-    phase = (T::end_phase - T::begin_phase)*ph/(2*M_PI) + T::begin_phase;
+    constexpr float twoPi = 2.f * static_cast<float>(M_PI);
+    phase = (T::end_phase - T::begin_phase) * ph / twoPi + T::begin_phase;
   }
   float getPhase(){
     // return phase 0 to 2*pi
-    return (phase - T::begin_phase)*2*M_PI/(T::end_phase - T::begin_phase);
+    constexpr float twoPi = 2.f * static_cast<float>(M_PI);
+    return (phase - T::begin_phase) * twoPi / (T::end_phase - T::begin_phase);
   }
   void reset(){
     phase = T::begin_phase;

@@ -9,18 +9,18 @@ public:
     return y1 + (y2 - y1) * mu;
   }
   static float cosine(float y1, float y2, float mu){
-    float mu2 = (1-cosf(mu*M_PI))/2;
-    return y1*(1-mu2)+y2*mu2;
+    float mu2 = (1.f - cosf(mu * static_cast<float>(M_PI))) / 2.f;
+    return y1 * (1.f - mu2) + y2 * mu2;
   }
   /** 
    * Three-point cubic interpolation of point between y1 and y2
    * ref: http://www.ebyte.it/library/codesnippets/P3Interpolation.html
    */
   static float cubic(float y0, float y1, float y2, float mu){
-    float d1 = 0.5*(y2-y0);
-    float d2 = y2-y1+y0-y1;
+    float d1 = 0.5f * (y2 - y0);
+    float d2 = y2 - y1 + y0 - y1;
     float dx = mu;
-    return y1 + dx*(d1+0.5*d2*dx);
+    return y1 + dx * (d1 + 0.5f * d2 * dx);
   }
   /**
    * Four-point cubic interpolation
@@ -38,12 +38,12 @@ public:
   static float cubicSmooth(float y0, float y1, float y2, float y3, float mu) {
     // use Catmull-Rom splines:
     // take the slope between the previous point and the next as the derivative at the current point
-    float mu2 = mu*mu;
-    float a0 = -0.5*y0 + 1.5*y1 - 1.5*y2 + 0.5*y3;
-    float a1 = y0 - 2.5*y1 + 2*y2 - 0.5*y3;
-    float a2 = -0.5*y0 + 0.5*y2;
+    float mu2 = mu * mu;
+    float a0 = -0.5f * y0 + 1.5f * y1 - 1.5f * y2 + 0.5f * y3;
+    float a1 = y0 - 2.5f * y1 + 2.f * y2 - 0.5f * y3;
+    float a2 = -0.5f * y0 + 0.5f * y2;
     float a3 = y1;
-    return a0*mu*mu2+a1*mu2+a2*mu+a3;
+    return a0 * mu * mu2 + a1 * mu2 + a2 * mu + a3;
   }
   /*
     Tension: 1 is high, 0 normal, -1 is low

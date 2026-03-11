@@ -420,13 +420,13 @@ void FloatArray::correlateInitialized(FloatArray operand2, FloatArray destinatio
 void FloatArray::gainToDecibel(FloatArray destination){
   ASSERT(destination.getSize()>=size, "Wrong array size");
   for(size_t i=0; i<size; i++)
-    destination[i] = log10f(data[i])*20.0;
+    destination[i] = log10f(data[i]) * 20.0f;
 }
 
 void FloatArray::decibelToGain(FloatArray destination){
   ASSERT(destination.getSize()>=size, "Wrong array size");
   for(size_t i=0; i<size; i++)
-    destination[i] = exp10f(data[i]*0.05);
+    destination[i] = exp10f(data[i] * 0.05f);
 }
 
 void FloatArray::ramp(float from, float to){
