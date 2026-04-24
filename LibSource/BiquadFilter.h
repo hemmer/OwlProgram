@@ -436,6 +436,8 @@ private:
   size_t channels;
 protected:
 public:
+  using BiquadFilter::process;
+
   MultiBiquadFilter(float sr, float* coefs, float* states, size_t stages, BiquadFilter* filters, size_t len) :
     BiquadFilter(sr, coefs, states, stages), filters(filters), channels(len){}
   virtual ~MultiBiquadFilter(){}
