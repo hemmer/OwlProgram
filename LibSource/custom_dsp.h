@@ -38,7 +38,7 @@ c/o stephen mccaul
 inline float fmax(float a, float b)
 {
     float r;
-#ifdef ARM_MATH_CM7
+#if defined(ARM_MATH_CM7) && !defined(METAMODULE)
     asm("vmaxnm.f32 %[d], %[n], %[m]" : [d] "=t"(r) : [n] "t"(a), [m] "t"(b) :);
 #else
     r = (a > b) ? a : b;
@@ -49,7 +49,7 @@ inline float fmax(float a, float b)
 inline float fmin(float a, float b)
 {
     float r;
-#ifdef ARM_MATH_CM7
+#if defined(ARM_MATH_CM7) && !defined(METAMODULE)
     asm("vminnm.f32 %[d], %[n], %[m]" : [d] "=t"(r) : [n] "t"(a), [m] "t"(b) :);
 #else
     r = (a < b) ? a : b;
